@@ -1,30 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { RootState } from "../../app/store";
+import { Item } from "../../types/items";
 
-interface Option {
-  quantity: number;
-  power?: number[];
-  color: string[] | string;
-  storage?: string[];
-}
-
-interface Item {
-  id: string;
-  name: string;
-  brand: string;
-  price: string;
-  available: boolean;
-  weight: number;
-  options: Option[];
-}
-
-interface GridState {
+interface ShopState {
   items: Item[];
   selectedItemId?: string;
 }
 
-const initialState: GridState = {
+const initialState: ShopState = {
   items: [],
   selectedItemId: undefined,
 };
@@ -48,7 +32,7 @@ export const shopSlice = createSlice({
   },
 });
 
-export const { selectItem } = shopSlice.actions;
+export const { selectItem, addItem, removeItem } = shopSlice.actions;
 
 export const selectAllItems = (state: RootState) => state.shop.items;
 
