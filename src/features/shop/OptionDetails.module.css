@@ -1,0 +1,36 @@
+.option {
+  display: flex;
+  flex-direction: row;
+  margin: 8px;
+}
+
+.label {
+  margin-right: 8px;
+  font-weight: bolder;
+}
+
+.option > div {
+  width: 20%;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+}
+
+.addToCart {
+  color: #558b2f;
+}
+
+.addToCartDisabled {
+  color: #757575;
+}
+
+.addToCart:hover {
+  cursor: pointer;
+  color: #9ccc65;
+}
+
+.addedMessage {
+  color: #76ff03;
+  font-weight: bolder;
+  margin-left: 16px;
+}

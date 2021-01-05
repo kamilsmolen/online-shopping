@@ -1,10 +1,13 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { selectAllItems, selectItem } from "./shopSlice";
-import styles from "./ShopList.module.css";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import styles from './ShopList.module.css';
+import { selectAllItems, selectIsListView, selectItem } from './shopSlice';
 
 export function ShopList() {
   const items = useSelector(selectAllItems);
+
+  const isListView = useSelector(selectIsListView);
 
   const dispatch = useDispatch();
 
@@ -12,7 +15,7 @@ export function ShopList() {
     dispatch(selectItem(id));
   };
 
-  return (
+  return isListView ? (
     <div className={styles.list}>
       {items.map((item) => (
         <div
@@ -26,5 +29,5 @@ export function ShopList() {
         </div>
       ))}
     </div>
-  );
+  ) : null;
 }

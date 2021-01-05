@@ -1,6 +1,7 @@
-import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import shopReducer from "../features/shop/shopSlice";
-import cartReducer from "../features/cart/cartSlice";
+import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
+
+import cartReducer from '../features/cart/cartSlice';
+import shopReducer from '../features/shop/shopSlice';
 
 export const store = configureStore({
   reducer: {
