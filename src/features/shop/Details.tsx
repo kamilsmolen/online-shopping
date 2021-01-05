@@ -23,7 +23,8 @@ export function Details() {
         {options.map((option, key) => (
           <OptionDetails
             option={option}
-            key={key}
+            itemId={item?.id}
+            optionId={key}
             available={item?.available}
           />
         ))}
@@ -31,7 +32,7 @@ export function Details() {
     );
   };
 
-  return item ? (
+  return item && isDetailsView ? (
     <div className={styles.detailsView}>
       <div className={styles.header}>
         <div className={styles.title}>{item.name}</div>
@@ -44,6 +45,9 @@ export function Details() {
       <div>
         <div className={styles.optionsTitle}>Options:</div>
         {renderOptions(item.options)}
+      </div>
+      <div onClick={handleReturnClick} className={styles.return}>
+        Return
       </div>
     </div>
   ) : null;

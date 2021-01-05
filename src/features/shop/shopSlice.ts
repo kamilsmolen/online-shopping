@@ -24,27 +24,27 @@ export const shopSlice = createSlice({
   reducers: {
     selectItem: (state, action: PayloadAction<number | undefined>) => {
       state.selectedItemId = action.payload;
-    },
-    addItemToStorage: (
-      state,
-      action: PayloadAction<{ id: number; option: number }>
-    ) => {
-      //change item quantity
+      state.isDetailsView = !!action.payload;
+      state.isListView = !action.payload;
     },
     removeItemFromStorage: (
       state,
-      action: PayloadAction<{ id: string; option: number }>
+      action: PayloadAction<{ id: number; option: number }>
     ) => {
-      //change item quantity
+      state.items = state.items.map((item) => {
+        if (item.id !== action.payload.id) return { ...item };
+        const returnOptions = item.options.map((option, index) =>
+          index === action.payload.option
+            ? { ...option, quantity: option.quantity - 1 }
+            : { ...option }
+        );
+        return { ...item, options: returnOptions };
+      });
     },
   },
 });
 
-export const {
-  selectItem,
-  addItemToStorage,
-  removeItemFromStorage,
-} = shopSlice.actions;
+export const { selectItem, removeItemFromStorage } = shopSlice.actions;
 
 export const selectAllItems = (state: RootState) => state.shop.items;
 

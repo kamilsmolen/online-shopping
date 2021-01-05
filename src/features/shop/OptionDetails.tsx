@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { faCartPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Option } from '../../types/items';
 import styles from './OptionDetails.module.css';
+import { removeItemFromStorage } from './shopSlice';
 
 interface OptionDetailsProps {
   option: Option;
-  key: number | string;
+  optionId?: number;
+  itemId?: number;
   available?: boolean;
 }
 
@@ -17,8 +20,18 @@ export function OptionDetails(props: OptionDetailsProps) {
 
   const isItemAvailable = props.available && props.option.quantity > 0;
 
+  const dispatch = useDispatch();
+
   const handleAddingToCart = () => {
-    if (!isItemAvailable) return;
+    if (
+      !isItemAvailable ||
+      props.itemId === undefined ||
+      props.optionId === undefined
+    )
+      return;
+    dispatch(
+      removeItemFromStorage({ id: props.itemId, option: props.optionId })
+    );
     setShowAdded(true);
     setTimeout(() => setShowAdded(false), 1500);
   };
@@ -84,7 +97,7 @@ export function OptionDetails(props: OptionDetailsProps) {
   );
 
   return (
-    <div className={styles.option} key={props.key}>
+    <div className={styles.option} key={props.optionId}>
       {renderColour()}
       {renderStorage()}
       {renderPower()}
