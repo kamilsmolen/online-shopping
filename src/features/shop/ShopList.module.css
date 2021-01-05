@@ -1,0 +1,33 @@
+.list {
+  width: 50%;
+  margin: auto;
+}
+
+.listItem {
+  display: flex;
+  text-align: left;
+  margin: 16px;
+  padding: 8px;
+  font-size: x-large;
+  background-color: #ffeb3b;
+  color: #212121;
+  border-radius: 16px;
+}
+
+.listItem:hover {
+  background-color: #f0f4c3;
+  cursor: pointer;
+}
+
+.listItemName {
+  flex: 50%;
+}
+
+.listItemPrice {
+  flex: 10%;
+}
+
+.listItemCart {
+  flex: 10%;
+  text-align: right;
+}

@@ -3,13 +3,15 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { Item } from "../../types/items";
 
+import itemsJSON from "../../data/items.json";
+
 interface ShopState {
   items: Item[];
-  selectedItemId?: string;
+  selectedItemId?: number;
 }
 
 const initialState: ShopState = {
-  items: [],
+  items: itemsJSON.items,
   selectedItemId: undefined,
 };
 
@@ -17,13 +19,16 @@ export const shopSlice = createSlice({
   name: "shop",
   initialState,
   reducers: {
-    selectItem: (state, action: PayloadAction<string | undefined>) => {
+    selectItem: (state, action: PayloadAction<number | undefined>) => {
       state.selectedItemId = action.payload;
     },
-    addItem: (state, action: PayloadAction<{ id: string; option: number }>) => {
+    addItemToStorage: (
+      state,
+      action: PayloadAction<{ id: number; option: number }>
+    ) => {
       //change item quantity
     },
-    removeItem: (
+    removeItemFromStorage: (
       state,
       action: PayloadAction<{ id: string; option: number }>
     ) => {
@@ -32,7 +37,11 @@ export const shopSlice = createSlice({
   },
 });
 
-export const { selectItem, addItem, removeItem } = shopSlice.actions;
+export const {
+  selectItem,
+  addItemToStorage,
+  removeItemFromStorage,
+} = shopSlice.actions;
 
 export const selectAllItems = (state: RootState) => state.shop.items;
 

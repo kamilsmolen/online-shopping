@@ -6,7 +6,7 @@ export interface Option {
 }
 
 export interface Item {
-  id: string;
+  id: number;
   name: string;
   brand: string;
   price: string;
