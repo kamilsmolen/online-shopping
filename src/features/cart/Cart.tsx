@@ -83,48 +83,62 @@ export function Cart() {
     dispatch(changeIsListView(true));
   };
 
+  const renderInfoSection = (item: CartItem) => (
+    <div>
+      <div className={styles.itemName}>{item.name}</div>
+      <div className={styles.itemDetails}>
+        <div>{`price: $ ${item.price}`}</div>
+        <div>{`weight: ${item.weight} kg`}</div>
+        <div>{`color: ${item.color}`}</div>
+        <div>{item.power && `power: ${item.power} W`}</div>
+        <div>{item.storage && `storage: ${item.storage} GB`}</div>
+      </div>
+    </div>
+  );
+
+  const renderQtySection = (item: CartItem) => (
+    <div className={styles.qtySection}>
+      <FontAwesomeIcon
+        className={
+          isDecreaseEnabled(item)
+            ? styles.qtySectionIcon
+            : styles.qtySectionIconDisabled
+        }
+        icon={faMinusCircle}
+        onClick={() => handleDecreaseClick(item)}
+      />
+
+      <div>{item.quantity}</div>
+      <FontAwesomeIcon
+        className={
+          isIncreaseEnabled(item)
+            ? styles.qtySectionIcon
+            : styles.qtySectionIconDisabled
+        }
+        icon={faPlusCircle}
+        onClick={() => handleIncreaseClick(item)}
+      />
+    </div>
+  );
+
+  const renderRemoveSection = (item: CartItem) => (
+    <div
+      onClick={() => handleRemoveClick(item)}
+      className={styles.removeSection}
+    >
+      <div>
+        <FontAwesomeIcon icon={faTrashAlt} />
+      </div>
+    </div>
+  );
+
   return isCartView ? (
     <div className={styles.cart}>
       {cartItemsSortedArray.map((item) => (
-        <div
-          className={styles.cartItem}
-          onClick={() => handleRemoveClick(item)}
-        >
-          <div className={styles.removeSection}>
-            <div>
-              <FontAwesomeIcon icon={faTrashAlt} />
-            </div>
-          </div>
-          <div className={styles.itemName}>{item.name}</div>
-          <div className={styles.itemDetails}>
-            <div>{`price: $ ${item.price}`}</div>
-            <div>{`weight: ${item.weight} kg`}</div>
-            <div>{`color: ${item.color}`}</div>
-            <div>{item.power && `power: ${item.power} W`}</div>
-            <div>{item.storage && `storage: ${item.storage} GB`}</div>
-          </div>
-          <div className={styles.qtySection}>
-            <FontAwesomeIcon
-              className={
-                isDecreaseEnabled(item)
-                  ? styles.qtySectionIcon
-                  : styles.qtySectionIconDisabled
-              }
-              icon={faMinusCircle}
-              onClick={() => handleDecreaseClick(item)}
-            />
-
-            <div>{item.quantity}</div>
-            <FontAwesomeIcon
-              className={
-                isIncreaseEnabled(item)
-                  ? styles.qtySectionIcon
-                  : styles.qtySectionIconDisabled
-              }
-              icon={faPlusCircle}
-              onClick={() => handleIncreaseClick(item)}
-            />
-          </div>
+        <div className={styles.cartItem}>
+          {renderRemoveSection(item)}
+          {renderInfoSection(item)}
+          {renderQtySection(item)}
         </div>
       ))}
       <div onClick={handleReturnClick} className={styles.returnButton}>
