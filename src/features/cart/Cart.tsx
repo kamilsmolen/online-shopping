@@ -28,17 +28,22 @@ export function Cart() {
     (a, b) => b.id - a.id
   );
 
-  const isIncreaseEnabled = (cartItem: CartItem) =>
-    totalOptionQty[createUniqueOptionId(cartItem)] <
-    storageItems[cartItem.id].options[cartItem.optionId].quantity;
+  const isIncreaseEnabled = (cartItem: CartItem) => {
+    const storageItem = storageItems.find((item) => item.id === cartItem.id);
+    return (
+      storageItem &&
+      totalOptionQty[createUniqueOptionId(cartItem)] <
+        storageItem.options[cartItem.optionId].quantity
+    );
+  };
 
   const isDecreaseEnabled = (cartItem: CartItem) =>
-    totalOptionQty[createUniqueOptionId(cartItem)] > 0;
+    totalOptionQty[createUniqueOptionId(cartItem)] > 1;
 
   const dispatch = useDispatch();
 
   const handleIncreaseClick = (cartItem: CartItem) => {
-    if (!isIncreaseEnabled) return;
+    if (!isIncreaseEnabled(cartItem)) return;
 
     dispatch(
       removeItemFromStorage({
@@ -52,7 +57,7 @@ export function Cart() {
   };
 
   const handleDecreaseClick = (cartItem: CartItem) => {
-    if (!isDecreaseEnabled) return;
+    if (!isDecreaseEnabled(cartItem)) return;
 
     dispatch(
       addItemToStorage({
