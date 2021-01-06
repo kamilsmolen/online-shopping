@@ -13,7 +13,7 @@ import {
     addToCart, changeIsCartView, removeFromCart, removeItem, selectCartItems, selectIsCartView,
     selectTotalOptionQty
 } from './cartSlice';
-import { createUniqueOptionId } from './cartUtils';
+import { countTotalPrice, countTotalWeight, createUniqueOptionId } from './cartUtils';
 
 export function Cart() {
   const storageItems = useSelector(selectAllItems);
@@ -121,6 +121,14 @@ export function Cart() {
     </div>
   );
 
+  const renderSummarySection = () => (
+    <div className={styles.summarySection}>
+      <div className={styles.summaryTitle}>{`Total:`}</div>
+      <div>{`weight: ${countTotalWeight(cartItemsSortedArray)} kg`}</div>
+      <div>{`price: $ ${countTotalPrice(cartItemsSortedArray)}`}</div>
+    </div>
+  );
+
   const renderRemoveSection = (item: CartItem) => (
     <div
       onClick={() => handleRemoveClick(item)}
@@ -141,6 +149,7 @@ export function Cart() {
           {renderQtySection(item)}
         </div>
       ))}
+      {renderSummarySection()}
       <div onClick={handleReturnClick} className={styles.returnButton}>
         Return
       </div>

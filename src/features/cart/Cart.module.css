@@ -78,3 +78,24 @@
 .returnButton:hover {
   background-color: #ec407a;
 }
+
+.summarySection {
+  padding: 24px;
+  margin: 24px;
+  background: #f9a825;
+  color: #212121;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: row;
+  font-size: 16px;
+  font-weight: bolder;
+}
+.summarySection > div {
+  margin-right: 16px;
+  padding: 8px;
+}
+
+.summaryTitle {
+  font-weight: bold;
+  margin-left: auto;
+}
