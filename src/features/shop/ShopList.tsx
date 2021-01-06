@@ -1,11 +1,14 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import styles from './ShopList.module.css';
-import { selectAllItems, selectIsListView, selectItem } from './shopSlice';
+import { selectTotalQty } from "../cart/cartSlice";
+import styles from "./ShopList.module.css";
+import { selectAllItems, selectIsListView, selectItem } from "./shopSlice";
 
 export function ShopList() {
   const items = useSelector(selectAllItems);
+
+  const totalCartQty = useSelector(selectTotalQty);
 
   const isListView = useSelector(selectIsListView);
 
@@ -25,7 +28,9 @@ export function ShopList() {
         >
           <div className={styles.listItemName}>{item.name}</div>{" "}
           <div className={styles.listItemPrice}>$ {item.price}</div>
-          <div className={styles.listItemCart}>xx</div>
+          <div className={styles.listItemCart}>
+            {totalCartQty[item.id] ? `${totalCartQty[item.id]} added` : ""}
+          </div>
         </div>
       ))}
     </div>

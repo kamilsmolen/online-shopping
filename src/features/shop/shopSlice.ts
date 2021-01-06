@@ -1,8 +1,8 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { RootState } from '../../app/store';
-import itemsJSON from '../../data/items.json';
-import { Item } from '../../types/items';
+import { RootState } from "../../app/store";
+import itemsJSON from "../../data/items.json";
+import { Item } from "../../types/items";
 
 interface ShopState {
   items: Item[];
