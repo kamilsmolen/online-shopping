@@ -1,13 +1,13 @@
-import React, { ChangeEvent, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { ChangeEvent, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { faCartPlus, faCheck } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Item, Option } from "../../types/items";
-import { addToCart } from "../cart/cartSlice";
-import styles from "./OptionDetails.module.css";
-import { removeItemFromStorage } from "./shopSlice";
+import { Item, Option } from '../../types/items';
+import { addToCart } from '../cart/cartSlice';
+import styles from './OptionDetails.module.css';
+import { removeItemFromStorage } from './shopSlice';
 
 interface OptionDetailsProps {
   option: Option;
@@ -46,7 +46,11 @@ export function OptionDetails(props: OptionDetailsProps) {
       return;
 
     dispatch(
-      removeItemFromStorage({ id: props.item.id, option: props.optionId })
+      removeItemFromStorage({
+        id: props.item.id,
+        option: props.optionId,
+        quantity: 1,
+      })
     );
 
     dispatch(
@@ -59,6 +63,7 @@ export function OptionDetails(props: OptionDetailsProps) {
         power: power,
         color: color,
         storage: storage,
+        optionId: props.optionId,
       })
     );
 

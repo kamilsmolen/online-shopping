@@ -1,14 +1,10 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Option } from "../../types/items";
-import styles from "./Details.module.css";
-import { OptionDetails } from "./OptionDetails";
-import {
-  selectIsDetailsView,
-  selectItem,
-  selectSelectedItem,
-} from "./shopSlice";
+import { Option } from '../../types/items';
+import styles from './Details.module.css';
+import { OptionDetails } from './OptionDetails';
+import { selectIsDetailsView, selectItem, selectSelectedItem } from './shopSlice';
 
 export function Details() {
   const item = useSelector(selectSelectedItem);
