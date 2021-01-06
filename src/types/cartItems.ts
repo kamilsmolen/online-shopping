@@ -16,6 +16,3 @@ export interface CartItems {
 export interface TotalQty {
   [key: string]: number;
 }
-export interface TotalOptionQty {
-  [key: string]: number;
-}

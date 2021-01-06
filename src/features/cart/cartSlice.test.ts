@@ -77,7 +77,6 @@ describe("test cart slice reducer", () => {
     expect(reducer(undefined, {})).toEqual({
       cartItems: {},
       totalQty: {},
-      totalOptionQty: {},
       isCartView: false,
     });
   });
@@ -91,14 +90,12 @@ describe("test cart slice reducer", () => {
     const initState = {
       cartItems: {},
       totalQty: {},
-      totalOptionQty: {},
       isCartView: false,
     };
 
     const expectation = {
       cartItems: {},
       totalQty: {},
-      totalOptionQty: {},
       isCartView: true,
     };
 
@@ -124,7 +121,6 @@ describe("test cart slice reducer", () => {
     const initState = {
       cartItems: {},
       totalQty: {},
-      totalOptionQty: {},
       isCartView: false,
     };
 
@@ -143,9 +139,6 @@ describe("test cart slice reducer", () => {
         },
       },
       totalQty: { "1": 1 },
-      totalOptionQty: {
-        "1_1": 1,
-      },
       isCartView: false,
     };
 
@@ -206,10 +199,6 @@ describe("test cart slice reducer", () => {
         },
       },
       totalQty: { "1": 4 },
-      totalOptionQty: {
-        "1_1": 3,
-        "1_2": 1,
-      },
       isCartView: false,
     };
 
@@ -251,10 +240,6 @@ describe("test cart slice reducer", () => {
         },
       },
       totalQty: { "1": 5 },
-      totalOptionQty: {
-        "1_1": 4,
-        "1_2": 1,
-      },
       isCartView: false,
     };
 
@@ -315,10 +300,6 @@ describe("test cart slice reducer", () => {
         },
       },
       totalQty: { "1": 4 },
-      totalOptionQty: {
-        "1_1": 3,
-        "1_2": 1,
-      },
       isCartView: false,
     };
 
@@ -360,10 +341,6 @@ describe("test cart slice reducer", () => {
         },
       },
       totalQty: { "1": 3 },
-      totalOptionQty: {
-        "1_1": 2,
-        "1_2": 1,
-      },
       isCartView: false,
     };
 
@@ -424,10 +401,6 @@ describe("test cart slice reducer", () => {
         },
       },
       totalQty: { "1": 4 },
-      totalOptionQty: {
-        "1_1": 3,
-        "1_2": 1,
-      },
       isCartView: false,
     };
 
@@ -458,10 +431,6 @@ describe("test cart slice reducer", () => {
         },
       },
       totalQty: { "1": 4 },
-      totalOptionQty: {
-        "1_1": 3,
-        "1_2": 1,
-      },
       isCartView: false,
     };
 

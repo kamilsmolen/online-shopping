@@ -105,7 +105,9 @@ export function OptionDetails(props: OptionDetailsProps) {
             }
           >
             {props.option.storage.map((e) => (
-              <option value={e}>{e}</option>
+              <option key={e} value={e}>
+                {e}
+              </option>
             ))}
           </select>
         }

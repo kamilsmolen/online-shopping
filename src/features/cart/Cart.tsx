@@ -10,15 +10,12 @@ import {
 } from '../shop/shopSlice';
 import styles from './Cart.module.css';
 import {
-    addToCart, changeIsCartView, removeFromCart, removeItem, selectCartItems, selectIsCartView,
-    selectTotalOptionQty
+    addToCart, changeIsCartView, removeFromCart, removeItem, selectCartItems, selectIsCartView
 } from './cartSlice';
-import { countTotalPrice, countTotalWeight, createUniqueOptionId } from './cartUtils';
+import { countTotalPrice, countTotalWeight } from './cartUtils';
 
 export function Cart() {
   const storageItems = useSelector(selectAllItems);
-
-  const totalOptionQty = useSelector(selectTotalOptionQty);
 
   const cartItems = useSelector(selectCartItems);
 
@@ -30,15 +27,10 @@ export function Cart() {
 
   const isIncreaseEnabled = (cartItem: CartItem) => {
     const storageItem = storageItems.find((item) => item.id === cartItem.id);
-    return (
-      storageItem &&
-      totalOptionQty[createUniqueOptionId(cartItem)] <
-        storageItem.options[cartItem.optionId].quantity
-    );
+    return storageItem && storageItem.options[cartItem.optionId].quantity > 0;
   };
 
-  const isDecreaseEnabled = (cartItem: CartItem) =>
-    totalOptionQty[createUniqueOptionId(cartItem)] > 1;
+  const isDecreaseEnabled = (cartItem: CartItem) => cartItem.quantity > 1;
 
   const dispatch = useDispatch();
 
@@ -147,8 +139,8 @@ export function Cart() {
 
   return isCartView ? (
     <div className={styles.cart}>
-      {cartItemsSortedArray.map((item) => (
-        <div className={styles.cartItem}>
+      {cartItemsSortedArray.map((item, key) => (
+        <div className={styles.cartItem} key={key}>
           {renderRemoveSection(item)}
           {renderInfoSection(item)}
           {renderQtySection(item)}

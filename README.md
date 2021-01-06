@@ -32,10 +32,9 @@ There are three views:
 1. Data is imported from mocked json file.
 2. Store & project structure is created in `ducks` pattern. It means each feature has its own directory inside `src/features` - each of them has its own store and components.
 3. Stores are combined in `app` directory.
-4. Store structure for `cart` is split into three maps:
+4. Store structure for `cart` is split into two maps:
 
 - cartItems - to access actual data in Cart. Each key is combination of product id, color, power and storage
-- totalOptionQty - to access quantity per variant. Each key is combination of product id and option id. This is to access faster quantity of option as some options can have different variants e.g. different storages.
 - totalQty - to access quantity per product. Each key is product id. This is to access faster quantity of product in List view.
 
 5. Basic tests are done for redux slices/ducks and utils.
