@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Option } from '../../types/items';
 import styles from './Details.module.css';
 import { OptionDetails } from './OptionDetails';
-import { selectIsDetailsView, selectItem, selectSelectedItem } from './shopSlice';
+import {
+    changeIsDetailsView, changeIsListView, selectIsDetailsView, selectItem, selectSelectedItem
+} from './shopSlice';
 
 export function Details() {
   const item = useSelector(selectSelectedItem);
@@ -15,6 +17,8 @@ export function Details() {
 
   const handleReturnClick = () => {
     dispatch(selectItem(undefined));
+    dispatch(changeIsListView(true));
+    dispatch(changeIsDetailsView(false));
   };
 
   const renderOptions = (options: Option[]) => {
@@ -43,7 +47,7 @@ export function Details() {
         <div className={styles.optionsTitle}>Options:</div>
         {renderOptions(item.options)}
       </div>
-      <div onClick={handleReturnClick} className={styles.return}>
+      <div onClick={handleReturnClick} className={styles.returnButton}>
         Return
       </div>
     </div>

@@ -24,8 +24,6 @@ export const shopSlice = createSlice({
   reducers: {
     selectItem: (state, action: PayloadAction<number | undefined>) => {
       state.selectedItemId = action.payload;
-      state.isDetailsView = !!action.payload;
-      state.isListView = !action.payload;
     },
     removeItemFromStorage: (
       state,
@@ -55,6 +53,12 @@ export const shopSlice = createSlice({
         return { ...item, options: returnOptions };
       });
     },
+    changeIsListView: (state, action: PayloadAction<boolean>) => {
+      state.isListView = action.payload;
+    },
+    changeIsDetailsView: (state, action: PayloadAction<boolean>) => {
+      state.isDetailsView = action.payload;
+    },
   },
 });
 
@@ -62,6 +66,8 @@ export const {
   selectItem,
   removeItemFromStorage,
   addItemToStorage,
+  changeIsListView,
+  changeIsDetailsView,
 } = shopSlice.actions;
 
 export const selectAllItems = (state: RootState) => state.shop.items;

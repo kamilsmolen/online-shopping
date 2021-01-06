@@ -31,3 +31,20 @@
   flex: 10%;
   text-align: right;
 }
+
+.checkoutButton {
+  width: 96px;
+  font-weight: bold;
+  border-radius: 12px;
+  margin: 8px;
+  margin-left: auto;
+  padding: 16px;
+  background-color: #ad1457;
+  color: #fafafa;
+  cursor: pointer;
+  text-align: center;
+}
+
+.checkoutButton:hover {
+  background-color: #ec407a;
+}

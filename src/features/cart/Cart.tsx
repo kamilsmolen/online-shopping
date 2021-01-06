@@ -5,10 +5,13 @@ import { faMinusCircle, faPlusCircle, faTrashAlt } from '@fortawesome/free-solid
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { CartItem } from '../../types/cartItems';
-import { addItemToStorage, removeItemFromStorage, selectAllItems } from '../shop/shopSlice';
+import {
+    addItemToStorage, changeIsListView, removeItemFromStorage, selectAllItems
+} from '../shop/shopSlice';
 import styles from './Cart.module.css';
 import {
-    addToCart, removeFromCart, removeItem, selectCartItems, selectTotalOptionQty
+    addToCart, changeIsCartView, removeFromCart, removeItem, selectCartItems, selectIsCartView,
+    selectTotalOptionQty
 } from './cartSlice';
 import { createUniqueOptionId } from './cartUtils';
 
@@ -18,6 +21,8 @@ export function Cart() {
   const totalOptionQty = useSelector(selectTotalOptionQty);
 
   const cartItems = useSelector(selectCartItems);
+
+  const isCartView = useSelector(selectIsCartView);
 
   const cartItemsSortedArray = Object.values(cartItems).sort(
     (a, b) => b.id - a.id
@@ -32,7 +37,7 @@ export function Cart() {
 
   const dispatch = useDispatch();
 
-  const handleIncrease = (cartItem: CartItem) => {
+  const handleIncreaseClick = (cartItem: CartItem) => {
     if (!isIncreaseEnabled) return;
 
     dispatch(
@@ -46,7 +51,7 @@ export function Cart() {
     dispatch(addToCart({ ...cartItem, quantity: 1 }));
   };
 
-  const handleDecrease = (cartItem: CartItem) => {
+  const handleDecreaseClick = (cartItem: CartItem) => {
     if (!isDecreaseEnabled) return;
 
     dispatch(
@@ -60,7 +65,7 @@ export function Cart() {
     dispatch(removeFromCart({ ...cartItem, quantity: 1 }));
   };
 
-  const handleRemove = (cartItem: CartItem) => {
+  const handleRemoveClick = (cartItem: CartItem) => {
     dispatch(
       addItemToStorage({
         id: cartItem.id,
@@ -73,10 +78,18 @@ export function Cart() {
     dispatch(removeItem({ ...cartItem }));
   };
 
-  return (
+  const handleReturnClick = () => {
+    dispatch(changeIsCartView(false));
+    dispatch(changeIsListView(true));
+  };
+
+  return isCartView ? (
     <div className={styles.cart}>
       {cartItemsSortedArray.map((item) => (
-        <div className={styles.cartItem} onClick={() => handleRemove(item)}>
+        <div
+          className={styles.cartItem}
+          onClick={() => handleRemoveClick(item)}
+        >
           <div className={styles.removeSection}>
             <div>
               <FontAwesomeIcon icon={faTrashAlt} />
@@ -98,7 +111,7 @@ export function Cart() {
                   : styles.qtySectionIconDisabled
               }
               icon={faMinusCircle}
-              onClick={() => handleDecrease(item)}
+              onClick={() => handleDecreaseClick(item)}
             />
 
             <div>{item.quantity}</div>
@@ -109,12 +122,14 @@ export function Cart() {
                   : styles.qtySectionIconDisabled
               }
               icon={faPlusCircle}
-              onClick={() => handleIncrease(item)}
+              onClick={() => handleIncreaseClick(item)}
             />
           </div>
         </div>
       ))}
-      <div className={styles.return}>Return</div>
+      <div onClick={handleReturnClick} className={styles.returnButton}>
+        Return
+      </div>
     </div>
-  );
+  ) : null;
 }

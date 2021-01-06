@@ -37,7 +37,7 @@
   margin: 8px;
 }
 
-.return {
+.returnButton {
   width: 64px;
   font-weight: bold;
   border-radius: 12px;
@@ -49,6 +49,6 @@
   cursor: pointer;
 }
 
-.return:hover {
+.returnButton:hover {
   background-color: #ec407a;
 }

@@ -8,12 +8,14 @@ interface CartState {
   cartItems: CartItems;
   totalQty: TotalQty;
   totalOptionQty: TotalOptionQty;
+  isCartView: boolean;
 }
 
 const initialState: CartState = {
   cartItems: {},
   totalQty: {},
   totalOptionQty: {},
+  isCartView: false,
 };
 
 export const cartSlice = createSlice({
@@ -71,10 +73,18 @@ export const cartSlice = createSlice({
 
       state.cartItems = { ...newCartItems };
     },
+    changeIsCartView: (state, action: PayloadAction<boolean>) => {
+      state.isCartView = action.payload;
+    },
   },
 });
 
-export const { addToCart, removeFromCart, removeItem } = cartSlice.actions;
+export const {
+  addToCart,
+  removeFromCart,
+  removeItem,
+  changeIsCartView,
+} = cartSlice.actions;
 
 export const selectCartItems = (state: RootState) => state.cart.cartItems;
 
@@ -82,5 +92,7 @@ export const selectTotalQty = (state: RootState) => state.cart.totalQty;
 
 export const selectTotalOptionQty = (state: RootState) =>
   state.cart.totalOptionQty;
+
+export const selectIsCartView = (state: RootState) => state.cart.isCartView;
 
 export default cartSlice.reducer;

@@ -63,7 +63,7 @@
   cursor: pointer;
 }
 
-.return {
+.returnButton {
   width: 64px;
   font-weight: bold;
   border-radius: 12px;
@@ -73,4 +73,8 @@
   background-color: #ad1457;
   color: #fafafa;
   cursor: pointer;
+}
+
+.returnButton:hover {
+  background-color: #ec407a;
 }
