@@ -152,6 +152,115 @@ describe("test cart slice reducer", () => {
     expect(reducer(initState, action)).toEqual(expectation);
   });
 
+  it("should handle cart/addToCart when item there", () => {
+    const action = {
+      type: "cart/addToCart",
+      payload: {
+        id: 1,
+        name: "test",
+        price: 1,
+        weight: 1,
+        quantity: 1,
+        power: 1,
+        color: "red",
+        storage: "storagetest",
+        optionId: 1,
+      },
+    };
+
+    const initState = {
+      cartItems: {
+        "1_red_storagetest_1": {
+          id: 1,
+          name: "test",
+          price: 1,
+          weight: 1,
+          quantity: 1,
+          power: 1,
+          color: "red",
+          storage: "storagetest",
+          optionId: 1,
+        },
+        "1_blue_storagetest_1": {
+          id: 1,
+          name: "test",
+          price: 1,
+          weight: 1,
+          quantity: 2,
+          power: 1,
+          color: "blue",
+          storage: "storagetest",
+          optionId: 1,
+        },
+
+        "1_blue_storagetest2_1": {
+          id: 1,
+          name: "test",
+          price: 1,
+          weight: 1,
+          quantity: 1,
+          power: 1,
+          color: "blue",
+          storage: "storagetest2",
+          optionId: 2,
+        },
+      },
+      totalQty: { "1": 4 },
+      totalOptionQty: {
+        "1_1": 3,
+        "1_2": 1,
+      },
+      isCartView: false,
+    };
+
+    const expectation = {
+      cartItems: {
+        "1_red_storagetest_1": {
+          id: 1,
+          name: "test",
+          price: 1,
+          weight: 1,
+          quantity: 2,
+          power: 1,
+          color: "red",
+          storage: "storagetest",
+          optionId: 1,
+        },
+        "1_blue_storagetest_1": {
+          id: 1,
+          name: "test",
+          price: 1,
+          weight: 1,
+          quantity: 2,
+          power: 1,
+          color: "blue",
+          storage: "storagetest",
+          optionId: 1,
+        },
+
+        "1_blue_storagetest2_1": {
+          id: 1,
+          name: "test",
+          price: 1,
+          weight: 1,
+          quantity: 1,
+          power: 1,
+          color: "blue",
+          storage: "storagetest2",
+          optionId: 2,
+        },
+      },
+      totalQty: { "1": 5 },
+      totalOptionQty: {
+        "1_1": 4,
+        "1_2": 1,
+      },
+      isCartView: false,
+    };
+
+    expect(reducer(initState, action)).toEqual(expectation);
+  });
+
   it("should handle cart/removeFromCart", () => {
     const action = {
       type: "cart/removeFromCart",
